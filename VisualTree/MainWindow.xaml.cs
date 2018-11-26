@@ -17,6 +17,7 @@ namespace VisualTree
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
+    /// 用递归查看可视化树
     /// </summary>
     public partial class MainWindow : Window
     {
