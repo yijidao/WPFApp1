@@ -29,8 +29,14 @@ namespace Tools
 
         private void ctlListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
+            try
+            {
+
+            
             var type = (Type)ctlListView.SelectedItem;
             var constructorInfo = type.GetConstructor(System.Type.EmptyTypes);
+
             var control = (Control)constructorInfo.Invoke(null);
             control.Visibility = Visibility.Collapsed;
             grid.Children.Add(control);
@@ -45,6 +51,11 @@ namespace Tools
             txtBlock.Text = stringBuilder.ToString();
 
             grid.Children.Remove(control);
+            }
+            catch (Exception ex)
+            {
+                txtBlock.Text = $"发生异常，异常信息为：{ex.Message}";
+            }
         }
 
         private void dllListView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
@@ -63,8 +74,8 @@ namespace Tools
                 {
                     derivedTypes.Add(type);
                 }
-                ctlListView.ItemsSource = derivedTypes;
             }
+            ctlListView.ItemsSource = derivedTypes;
         }
     }
 }
